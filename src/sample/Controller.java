@@ -65,7 +65,7 @@ public class Controller {
             msgTextField.setText("");
             writer.write(Name+msg+"\n");
             BufferedWriter bw =new BufferedWriter(new FileWriter("Files/file.txt"));
-            bw.write("Mahmud"+msg+"\n");
+            bw.write("Mahmud:"+msg+"\n");
             writer.flush();
             bw.close();
         }catch (IOException e){
