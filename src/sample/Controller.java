@@ -26,7 +26,7 @@ public class Controller {
     }
 
     public Controller(){
-        String myName="Sakib";
+        //String Name="Mahmud";
         try {
             Socket socket = new Socket("127.0.0.1", 5000);
             OutputStreamWriter o=new OutputStreamWriter(socket.getOutputStream());
@@ -36,13 +36,15 @@ public class Controller {
             InputStreamReader isr=new InputStreamReader(socket.getInputStream());
             reader=new BufferedReader(isr);
 
+            //writer.write(Name+"\n");
+            //writer.flush();
             Thread t=new Thread(){
                 public void run(){
                     try{
                         String line=reader.readLine()+"\n";
                         while(line!=null){
                             allTextArea.appendText(line);
-                            line=reader.readLine();
+                            line=reader.readLine()+"\n";
                         }
                     }catch (IOException e){
                         e.printStackTrace();
@@ -57,10 +59,15 @@ public class Controller {
 
     @FXML
     void msgSend(){
+        String Name="Mahmud:";
         try {
             String msg = msgTextField.getText() + "\n";
-            writer.write(msg);
+            msgTextField.setText("");
+            writer.write(Name+msg+"\n");
+            BufferedWriter bw =new BufferedWriter(new FileWriter("Files/file.txt"));
+            bw.write("Mahmud"+msg+"\n");
             writer.flush();
+            bw.close();
         }catch (IOException e){
             e.printStackTrace();
         }
